@@ -1,17 +1,15 @@
-import React, { ElementType, FC, ReactElement, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Transition, Transitioning, TransitioningView } from 'react-native-reanimated';
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { useNavigationContainerRef } from "@react-navigation/native";
 import { navigate } from "../utils/RootNavigation";
-
 
 const ToggleIcon = () => {
     const ref = useRef<TransitioningView | null>(null);
     const [toggled, setToggled] = useState(false);
-    const t = useNavigationContainerRef();
 
     const toggle = () => setToggled(!toggled);
+
     const onPressHandler = () => {
         toggle();
         navigate(toggled ? 'mapScreen' : 'listScreen');

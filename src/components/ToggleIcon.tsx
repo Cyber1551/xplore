@@ -1,19 +1,21 @@
-import React, { useRef, useState } from "react";
+import React, { FC, useRef } from "react";
 import { Transition, Transitioning, TransitioningView } from 'react-native-reanimated';
 import { SimpleLineIcons } from "@expo/vector-icons";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { navigate } from "../utils/RootNavigation";
 
-const ToggleIcon = () => {
+export interface IToggleIcon {
+    navigateTo: string;
+}
+const ToggleIcon:FC<IToggleIcon> = ({navigateTo}) => {
     const ref = useRef<TransitioningView | null>(null);
-    const [toggled, setToggled] = useState(false);
-
-    const toggle = () => setToggled(!toggled);
-
     const onPressHandler = () => {
-        toggle();
-        navigate(toggled ? 'mapScreen' : 'listScreen');
+        navigate(navigateTo);
         ref.current?.animateNextTransition();
+    }
+    const getCurrentRoute = () => {
+        if (navigateTo === 'mapScreen') return 'map'
+        else return 'list';
     }
 
     return (
@@ -23,7 +25,7 @@ const ToggleIcon = () => {
                 style={styles.button}
             >
                 <Transitioning.View transition={transition} ref={ref}>
-                    <SimpleLineIcons size={30} name={toggled ? 'list' : 'map'} />
+                    <SimpleLineIcons size={30} name={getCurrentRoute()} />
                 </Transitioning.View>
             </TouchableOpacity>
         </View>

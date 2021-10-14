@@ -26,6 +26,7 @@ export const LocationProvider = (props: { children: ReactElement | ReactElement[
         }
         else {
             const location = await Location.getCurrentPositionAsync({});
+            console.log(location.coords)
             setCurrentLocation({
                 lat: location.coords.latitude,
                 long: location.coords.longitude

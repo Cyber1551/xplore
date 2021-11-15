@@ -29,7 +29,6 @@ const ToggleIcon:FC<IToggleIcon> = ({navigateTo}) => {
                 </Transitioning.View>
             </TouchableOpacity>
         </View>
-
     )
 }
 
